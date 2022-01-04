@@ -15,4 +15,13 @@ Para Trabajar con GIT necesitamos instalar:
 
 2. agregar los archivos a la zona intermedia (index) 
  > git add .
+3. agreagar del index al head 
+ > git commit -m "primer commit"
 
+4.1 Crear un repositorio en GITHUB
+
+4.2 asignar un repositorio remoto de (github) a nuestro repositorio local
+> git remote add origin https://github.com/cchura94/sis-academico-laravel.git
+
+5. subir los cambios al repositorio remoto
+> git push -u origin master
