@@ -1,0 +1,18 @@
+Para Trabajar con GIT necesitamos instalar:
+ 1. Instalar GIT (https://git-scm.com/)
+    - instalar git (siguiente)
+    - configurar git (habilitar o asignar el correo y usuario) :
+      > git config --global user.name "cristian"
+      > git config --global user.email "cchura.abc@gmail.com"
+ 2. Crear una cuenta (GITLAB, GITHUB, BITBUCKET)
+
+----------------------------------------------------------
+1.1 Clonar el repositorio 
+ > git clone https://github.com/DanielGeek/24_7_tienda.git
+
+1.2 iniciar con un nuevo repositorio
+ > git init
+
+2. agregar los archivos a la zona intermedia (index) 
+ > git add .
+
