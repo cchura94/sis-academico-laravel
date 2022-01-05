@@ -79,6 +79,7 @@
               
             </ul>
           </li>
+          @if(Auth::user()->role == 'docente')
           <li class="nav-item">
             <a href="{{ route('carrera.index') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -88,11 +89,12 @@
               </p>
             </a>
           </li>
+          @endif
           <li class="nav-item">
-            <a href="{{ route('asignacion_materias') }}" class="nav-link">
+            <a href="{{ route('periodo.index') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                ASIGNACIÓN MATERIAS
+                PERIODO - GESTION
                 <!--span class="right badge badge-danger">New</span-->
               </p>
             </a>

@@ -18,6 +18,6 @@ class Persona extends Model
 
     public function materias()
     {
-        return $this->belongsToMany(Materia::class);
+        return $this->belongsToMany(Materia::class)->withPivot("periodo_id", "nota");
     }
 }

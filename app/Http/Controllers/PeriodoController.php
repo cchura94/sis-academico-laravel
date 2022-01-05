@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Periodo;
 use Illuminate\Http\Request;
 
 class PeriodoController extends Controller
@@ -13,7 +14,8 @@ class PeriodoController extends Controller
      */
     public function index()
     {
-        //
+        $lista_periodos = Periodo::get();
+        return view("admin.periodo.index", compact("lista_periodos"));
     }
 
     /**
@@ -34,7 +36,18 @@ class PeriodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "nombre" => "required"
+        ]);
+
+        $periodo = new Periodo;
+        $periodo->nombre = $request->nombre;
+        $periodo->duracion = $request->duracion;
+        $periodo->gestion = $request->gestion;
+        $periodo->descripcion = $request->descripcion;
+        $periodo->save();
+        
+        return redirect()->back();
     }
 
     /**

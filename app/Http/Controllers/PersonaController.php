@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carrera;
+use App\Models\Periodo;
 use Illuminate\Http\Request;
 use App\Models\Persona;
+use Exception;
 
 class PersonaController extends Controller
 {
@@ -49,16 +51,24 @@ class PersonaController extends Controller
             "ci" => "required|unique:personas"
         ]);
 
-        $persona = new Persona;
-        $persona->nombres = $request->nombres;
-        $persona->paterno = $request->paterno;
-        $persona->materno = $request->materno;
-        $persona->ci = $request->ci;
-        $persona->telefono = $request->telefono;
-        $persona->direccion = $request->direccion;
-        $persona->save();
+        try{
+            $persona = new Persona;
+            $persona->nombres = $request->nombres;
+            $persona->paterno = $request->paterno;
+            $persona->materno = $request->materno;
+            $persona->ci = $request->ci;
+            $persona->telefono = $request->telefono;
+            $persona->direccion = $request->direccion;
+            $persona->saveOrFail();
 
+            /*Persona::create([
+
+            ])*/
+        }catch(Exception $e){
+            
+        }
         return redirect("/admin/persona")->with("mensaje", "La Persona ha sido registrada");
+
     }
 
     /**
@@ -69,7 +79,8 @@ class PersonaController extends Controller
      */
     public function show($id)
     {
-        //
+        $persona = Persona::findOrFail($id);
+        return $persona;
     }
 
     /**
@@ -127,7 +138,8 @@ class PersonaController extends Controller
     {
         $carrera = Carrera::find($request->carrera_id);
         $persona = Persona::find($id);
-        return view("admin.materia.asig_materias_persona", compact("carrera", "persona"));
+        $perido = Periodo::get();
+        return view("admin.materia.asig_materias_persona", compact("carrera", "persona", "perido"));
     }
 
     public function asignar(Request $request, $id)
@@ -135,7 +147,7 @@ class PersonaController extends Controller
         // return $request;
         // M:M
         $persona = Persona::find($id);
-    $persona->materias()->attach($request->materias/*, ["periodo_id" => $request->periodo_id]*/);
+        $persona->materias()->attach($request->materias, ["periodo_id" => $request->periodo_id]);
         
         return redirect()->back();
     }

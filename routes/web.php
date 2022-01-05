@@ -29,7 +29,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post("persona/{id}/asignar", [PersonaController::class, "asignar"])->name("asignar");
     Route::get("carrera/reportepdf", [CarreraController::class, "reporte"]);
 
-    Route::resource("carrera", CarreraController::class);
+    Route::resource("carrera", CarreraController::class)->middleware(["role:docente"]);
     Route::resource("aula", AulaController::class);
     Route::resource("periodo", PeriodoController::class);
     Route::resource("materia", MateriaController::class);

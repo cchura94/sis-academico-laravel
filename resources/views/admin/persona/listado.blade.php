@@ -95,7 +95,47 @@
               </td>
               <td>
 
-              <a href="{{ route('asignacion_materias_personas', $per->id) }}" class="btn btn-outline-info">asignar Materias</a>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalPer{{$per->id}}">
+  Mostrar Materias
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalPer{{$per->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Materias</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <tr>
+            <th>NOMBRE</th>
+            <th>SIGLA</th>
+            <th>SEMESTRE</th>
+          </tr>
+          @foreach ($per->materias as $materia)
+          <tr>
+            <td>{{ $materia->nombre }}</td>
+            <td>{{ $materia->sigla }}</td>
+            <td>{{ $materia->semestre }}</td>
+          </tr>
+            
+          @endforeach
+
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPersonaAsig{{ $per->id }}">
   Asignar Materias
